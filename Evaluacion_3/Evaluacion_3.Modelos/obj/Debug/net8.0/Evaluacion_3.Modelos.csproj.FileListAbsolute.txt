@@ -1,0 +1,5 @@
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.csproj.AssemblyReference.cache
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.AssemblyInfoInputs.cache
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.AssemblyInfo.cs
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.csproj.CoreCompileInputs.cache

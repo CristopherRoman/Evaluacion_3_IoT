@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Evaluacion_3.Vistas.CrearEstudiante"
+             Title="CrearEstudiante">
+        <VerticalStackLayout Padding="10" Spacing="10">
+
+            <Entry Placeholder="Nombre Completo"
+                   x:Name="NombreCompletoEntry"/>
+            <Entry Placeholder="Correo Electrónico"
+                    x:Name="correoEntry"/>
+            <Entry Placeholder="Edad"
+                    x:Name="EdadEntry"
+                    Keyboard="Numeric"/>
+            <Entry Placeholder="Curso"
+                    x:Name="CursoEntry"/>
+            <DatePicker x:Name="fechaInicioPicker"/>
+            <Button Text="Guardar"
+                x:Name="guardarButton"
+                Clicked="guardarButton_Clicked"/>
+            
+        </VerticalStackLayout>
+</ContentPage>
