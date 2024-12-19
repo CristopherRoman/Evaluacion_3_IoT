@@ -1,5 +1,13 @@
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\bin\Debug\net8.0\Evaluacion_3.Modelos.deps.json
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\bin\Debug\net8.0\Evaluacion_3.Modelos.dll
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\bin\Debug\net8.0\Evaluacion_3.Modelos.pdb
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.csproj.AssemblyReference.cache
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.AssemblyInfoInputs.cache
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.AssemblyInfo.cs
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.csproj.CoreCompileInputs.cache
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.sourcelink.json
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.dll
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\refint\Evaluacion_3.Modelos.dll
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\Evaluacion_3.Modelos.pdb
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3.Modelos\obj\Debug\net8.0\ref\Evaluacion_3.Modelos.dll

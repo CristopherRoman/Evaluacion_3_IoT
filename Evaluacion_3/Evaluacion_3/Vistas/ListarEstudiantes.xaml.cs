@@ -26,19 +26,23 @@ public partial class ListarEstudiantes : ContentPage
 		});
     }
 
-    private void filtroSearchBar_TextChanged(object sender, TextChangedEventArgs e)
-	{
-		string filtro = filtroSearchBar.Text.ToLower();
-		if (filtro.Length > 0)
-		{
-			ListaCollection.ItemsSource = Lista.Where(x => x.NombreCompleto.ToLower().Contains(filtro));
+    private void FiltroSearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        string filtro = filtroSearchBar?.Text?.ToLower() ?? string.Empty;
+
+        if (filtro.Length > 0)
+        {
+            ListaCollection.ItemsSource = Lista
+                .Where(x => !string.IsNullOrEmpty(x.NombreCompleto) && x.NombreCompleto.ToLower().Contains(filtro))
+                .ToList(); 
         }
         else
         {
-			ListaCollection.ItemsSource = Lista;
+            ListaCollection.ItemsSource = Lista;
         }
     }
-	private async void NuevoEstudianteBoton_Clicked(object sender, EventArgs e)
+
+    private async void NuevoEstudianteBoton_Clicked(object sender, EventArgs e)
 	{
 		await Navigation.PushAsync(new CrearEstudiante());
 	}
