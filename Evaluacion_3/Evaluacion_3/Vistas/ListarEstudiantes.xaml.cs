@@ -19,7 +19,7 @@ public partial class ListarEstudiantes : ContentPage
     {
 		client.Child("Estudiante").AsObservable<Estudiante>().Subscribe((Estudiante) =>
 		{
-			if (Estudiante != null)
+			if (Estudiante.Object != null)
 			{
 				Lista.Add(Estudiante.Object);
 			}
