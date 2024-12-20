@@ -8,7 +8,7 @@ namespace Evaluacion_3
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new CrearEstudiante());
+            MainPage = new NavigationPage(new ListarEstudiantes());
         }
     }
 }
