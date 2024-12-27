@@ -8,12 +8,13 @@
         <Picker Title="Seleccionar Nivel"
                 x:Name="nivelPicker"
                 ItemsSource="{Binding ListarNil}"
-                ItemDisplayBinding="{Binding Nombre}"/>
+                ItemDisplayBinding="{Binding Nombre}"
+                SelectedIndexChanged="NivelPicker_SelectedIndexChanged"/>
 
         <Picker Title="Seleccionar Curso"
                 x:Name="cursoPicker"
                 IsEnabled="False"
-                ItemsSource="{Binding ListarNil}"
+                ItemsSource="{Binding ListarCursos}"
                 ItemDisplayBinding="{Binding Nombre}"/>
 
         <Label Text="Primer Nombre:" />

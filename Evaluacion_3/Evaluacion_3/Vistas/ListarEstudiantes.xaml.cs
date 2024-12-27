@@ -20,14 +20,12 @@ public partial class ListarEstudiantes : ContentPage
 
     private async void GenerarLista()
     {
-        // Con esto obtengo los datos cargados en la BD al inicio de la app
         var estudiantes = await client.Child("Estudiantes").OnceAsync<Estudiante>();
         foreach (var estudiante in estudiantes)
         {
             if (estudiante.Object.Estado)
             {
                 estudiante.Object.Id = estudiante.Key;
-                // Verifica si el estudiante ya está en la lista antes de agregarlo
                 if (!Lista.Any(e => e.Id == estudiante.Key))
                 {
                     Lista.Add(estudiante.Object);
@@ -36,12 +34,10 @@ public partial class ListarEstudiantes : ContentPage
             }
         }
 
-        // Con esto cargo los cambios que se realicen en el listado, carga de nuevos alumnos
         client.Child("Estudiantes").AsObservable<Estudiante>().Subscribe((estudiante) =>
         {
             if (estudiante != null && estudiante.Object.Estado && !Lista.Any(e => e.Id == estudiante.Key))
             {
-                // Asignar el Key cuando se actualiza el estudiante
                 estudiante.Object.Id = estudiante.Key;
                 Lista.Add(estudiante.Object);
                 ListaCompleta.Add(estudiante.Object);

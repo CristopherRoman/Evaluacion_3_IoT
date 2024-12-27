@@ -37,7 +37,7 @@ namespace Evaluacion_3
 
                 // Verificar si ya existen los niveles
                 var nivel = await client.Child("Nivel").OnceAsync<Nivel>();
-                if (!nivel.Any())  // Usar Any() para evitar recorrer toda la colección
+                if (nivel.Count == 0)  // Usar Any() para evitar recorrer toda la colección
                 {
                     await client.Child("Nivel").PostAsync(new Nivel { Nombre = "Basica" });
                     await client.Child("Nivel").PostAsync(new Nivel { Nombre = "Media" });
@@ -45,7 +45,7 @@ namespace Evaluacion_3
 
                 // Verificar si ya existen los cursos
                 var cursos = await client.Child("Cursos").OnceAsync<Curso>();
-                if (!cursos.Any())
+                if (cursos.Count == 0)
                 {
                     // Crear cursos para "Basica"
                     var cursosBasica = new string[] { "1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°" };

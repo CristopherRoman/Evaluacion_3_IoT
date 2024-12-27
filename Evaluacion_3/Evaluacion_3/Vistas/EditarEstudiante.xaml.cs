@@ -17,11 +17,9 @@ public partial class EditarEstudiante : ContentPage
         InitializeComponent();
         estudianteID = idEstudiante;
         ListarNivel();
-        ListarCurso();
         CargarEstudiante(estudianteID);
     }
 
-    // Método para cargar los niveles
     private async void ListarNivel()
     {
         try
@@ -39,25 +37,28 @@ public partial class EditarEstudiante : ContentPage
         }
     }
 
-    // Método para cargar los cursos
-    private async void ListarCurso()
+    private async void CargarCursosPorNivel(Nivel nivelSeleccionado)
     {
         try
         {
-            var cursos = await client.Child("Cursos").OnceAsync<Curso>();
+            var cursos = await client.Child("Cursos")
+                                      .OrderBy("Nivel")
+                                      .EqualTo(nivelSeleccionado.Nombre)
+                                      .OnceAsync<Curso>();
+
             ListarCursos.Clear();
             foreach (var curso in cursos)
             {
                 ListarCursos.Add(curso.Object);
             }
-        }
+
+            cursoPicker.IsEnabled = true;  
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"Error al cargar cursos: {ex.Message}", "OK");
         }
     }
 
-    // Método para cargar el estudiante a editar
     private async void CargarEstudiante(string idEstudiante)
     {
         try
@@ -72,9 +73,19 @@ public partial class EditarEstudiante : ContentPage
                 EditSegundoApellidoEntry.Text = estudiante.SegundoApellido;
                 EditCorreoEntry.Text = estudiante.CorreoElectronico;
 
-                // Establecer el nivel y curso seleccionados
-                nivelPicker.SelectedItem = estudiante.Nivel;
-                cursoPicker.SelectedItem = estudiante.Curso;
+                var nivelSeleccionado = ListarNil.FirstOrDefault(n => n.Nombre == estudiante.Nivel);
+                if (nivelSeleccionado != null)
+                {
+                    nivelPicker.SelectedItem = nivelSeleccionado;
+                    CargarCursosPorNivel(nivelSeleccionado);
+                }
+
+                var cursoSeleccionado = ListarCursos.FirstOrDefault(c => c.Nombre == estudiante.Curso);
+                if (cursoSeleccionado != null)
+                {
+                    cursoPicker.SelectedItem = cursoSeleccionado;
+                }
+
                 estadoSwitch.IsToggled = estudiante.Estado;
             }
         }
@@ -84,12 +95,18 @@ public partial class EditarEstudiante : ContentPage
         }
     }
 
-    // Método para actualizar los datos del estudiante
+    private async void NivelPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (nivelPicker.SelectedItem is Nivel nivelSeleccionado)
+        {
+            CargarCursosPorNivel(nivelSeleccionado);  
+        }
+    }
+
     private async void ActualizarButton_Clicked(object sender, EventArgs e)
     {
         try
         {
-            // Validaciones de campos
             if (string.IsNullOrWhiteSpace(EditPrimerNombreEntry.Text) ||
                 string.IsNullOrWhiteSpace(EditSegundoNombreEntry.Text) ||
                 string.IsNullOrWhiteSpace(EditPrimerApellidoEntry.Text) ||
@@ -102,14 +119,12 @@ public partial class EditarEstudiante : ContentPage
                 return;
             }
 
-            // Validación del correo electrónico
             if (!IsValidEmail(EditCorreoEntry.Text))
             {
                 await DisplayAlert("Error", "El correo electrónico no es válido", "OK");
                 return;
             }
 
-            // Crear el objeto actualizado
             Estudiante estudianteActualizado = new Estudiante
             {
                 PrimerNombre = EditPrimerNombreEntry.Text.Trim(),
@@ -117,12 +132,11 @@ public partial class EditarEstudiante : ContentPage
                 PrimerApellido = EditPrimerApellidoEntry.Text.Trim(),
                 SegundoApellido = EditSegundoApellidoEntry.Text.Trim(),
                 CorreoElectronico = EditCorreoEntry.Text.Trim(),
-                Nivel = nivelPicker.SelectedItem.ToString(),
-                Curso = cursoPicker.SelectedItem.ToString(),
+                Nivel = ((Nivel)nivelPicker.SelectedItem).Nombre,  
+                Curso = ((Curso)cursoPicker.SelectedItem).Nombre,  
                 Estado = estadoSwitch.IsToggled
             };
 
-            // Actualizar los datos en Firebase
             await client.Child("Estudiantes").Child(estudianteID).PutAsync(estudianteActualizado);
 
             await DisplayAlert("Éxito", "El estudiante se ha actualizado correctamente", "OK");
@@ -134,7 +148,6 @@ public partial class EditarEstudiante : ContentPage
         }
     }
 
-    // Método para validar el correo electrónico utilizando una expresión regular
     private bool IsValidEmail(string email)
     {
         var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";

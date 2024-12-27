@@ -37,17 +37,29 @@ public partial class CrearEstudiante : ContentPage
         OnPropertyChanged(nameof(Niveles));
 
     }
+    #region 
+    //private async void cursoPicker_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    if (cursoPicker.SelectedItem is Curso cursoSeleccionado)
+    //    {
+    //        var cursosFiltrados = Cursos.Where(c => c.Nivel == cursoSeleccionado.Nombre).ToList();
+    //        cursoPicker.ItemsSource = cursosFiltrados;
+    //        cursoPicker.IsEnabled = true;
+    //    }
 
+    //}
+    #endregion
     private async void nivelPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (nivelPicker.SelectedItem is Nivel nivelSeleccionado)
         {
             var cursosFiltrados = Cursos.Where(c => c.Nivel == nivelSeleccionado.Nombre).ToList();
-            cursoPicker.ItemsSource = cursosFiltrados;
-            cursoPicker.IsEnabled = true;
-        }
 
+            cursoPicker.ItemsSource = cursosFiltrados;
+            cursoPicker.IsEnabled = cursosFiltrados.Count != 0;
+        }
     }
+
 
     private async void guardarButton_Clicked(object sender, EventArgs e)
     {
