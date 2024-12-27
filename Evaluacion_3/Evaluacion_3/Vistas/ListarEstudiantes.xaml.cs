@@ -26,20 +26,25 @@ public partial class ListarEstudiantes : ContentPage
         {
             if (estudiante.Object.Estado)
             {
-                Lista.Add(estudiante.Object);
-                ListaCompleta.Add(estudiante.Object);
-                IdEstudiante = estudiante.Key;
+                estudiante.Object.Id = estudiante.Key;
+                // Verifica si el estudiante ya está en la lista antes de agregarlo
+                if (!Lista.Any(e => e.Id == estudiante.Key))
+                {
+                    Lista.Add(estudiante.Object);
+                    ListaCompleta.Add(estudiante.Object);
+                }
             }
         }
 
         // Con esto cargo los cambios que se realicen en el listado, carga de nuevos alumnos
         client.Child("Estudiantes").AsObservable<Estudiante>().Subscribe((estudiante) =>
         {
-            if (estudiante != null && estudiante.Object.Estado)
+            if (estudiante != null && estudiante.Object.Estado && !Lista.Any(e => e.Id == estudiante.Key))
             {
+                // Asignar el Key cuando se actualiza el estudiante
+                estudiante.Object.Id = estudiante.Key;
                 Lista.Add(estudiante.Object);
                 ListaCompleta.Add(estudiante.Object);
-                IdEstudiante = estudiante.Key;
             }
         });
     }
@@ -67,13 +72,13 @@ public partial class ListarEstudiantes : ContentPage
 
     private async void editarButton_Clicked(object sender, EventArgs e)
     {
-        
+
         var boton = sender as ImageButton;
         var estudiante = boton?.CommandParameter as Estudiante;
 
-        if (estudiante != null && !string.IsNullOrEmpty(IdEstudiante))
+        if (estudiante != null && !string.IsNullOrEmpty(estudiante.Id))
         {
-            await Navigation.PushAsync(new EditarEstudiante(IdEstudiante));
+            await Navigation.PushAsync(new EditarEstudiante(estudiante.Id));
         }
         else
         {
@@ -100,7 +105,7 @@ public partial class ListarEstudiantes : ContentPage
             try
             {
                 estudiante.Estado = false;
-                await client.Child("Estudiantes").Child(IdEstudiante).PutAsync(estudiante);
+                await client.Child("Estudiantes").Child(estudiante.Id).PutAsync(estudiante);
                 await DisplayAlert("Exito", $"Se ha deshabilitado correctamente al usuario {estudiante.NombreCompleto}", "OK");
                 GenerarLista();
 
