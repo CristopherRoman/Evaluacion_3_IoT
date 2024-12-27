@@ -73,6 +73,9 @@
 	  <MauiXaml Update="Vistas\CrearEstudiante.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Vistas\EditarEstudiante.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Vistas\ListarEstudiantes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

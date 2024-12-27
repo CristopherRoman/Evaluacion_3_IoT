@@ -54,6 +54,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Evaluacion_3.Vistas.CrearE
 build_metadata.AdditionalFiles.TargetPath = Vistas\CrearEstudiante.xaml
 build_metadata.AdditionalFiles.RelativePath = Vistas\CrearEstudiante.xaml
 
+[C:/Users/crist/source/repos/Evaluacion_3/Evaluacion_3/Vistas/EditarEstudiante.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Evaluacion_3.Vistas.EditarEstudiante.xaml
+build_metadata.AdditionalFiles.TargetPath = Vistas\EditarEstudiante.xaml
+build_metadata.AdditionalFiles.RelativePath = Vistas\EditarEstudiante.xaml
+
 [C:/Users/crist/source/repos/Evaluacion_3/Evaluacion_3/Vistas/ListarEstudiantes.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Evaluacion_3.Vistas.ListarEstudiantes.xaml

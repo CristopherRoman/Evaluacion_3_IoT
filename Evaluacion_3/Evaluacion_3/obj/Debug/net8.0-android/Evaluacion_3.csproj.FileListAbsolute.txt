@@ -1062,3 +1062,5 @@ C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3\obj\Debug\net8.0-android\a
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3\obj\Debug\net8.0-android\android\assets\x86\System.Private.CoreLib.dll
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3\obj\Debug\net8.0-android\android\assets\x86_64\System.Private.CoreLib.dll
 C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3\obj\Debug\net8.0-android\android\assets\System.Private.CoreLib.dll
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3\obj\Debug\net8.0-android\resizetizer\r\drawable\edit_icon.png
+C:\Users\crist\source\repos\Evaluacion_3\Evaluacion_3\obj\Debug\net8.0-android\resizetizer\r\drawable\disable.png
