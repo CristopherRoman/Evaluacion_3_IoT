@@ -52,7 +52,8 @@ public partial class EditarEstudiante : ContentPage
                 ListarCursos.Add(curso.Object);
             }
 
-            cursoPicker.IsEnabled = true;  
+            cursoPicker.IsEnabled = true;
+        }
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"Error al cargar cursos: {ex.Message}", "OK");
