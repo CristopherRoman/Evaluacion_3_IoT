@@ -10,6 +10,6 @@ namespace Evaluacion_3.Modelos.Modelos
     {
         public string? Nombre { get; set; }
         public string? Nivel { get; set; }
-        public bool? Estado { get; set; }
+        public bool Estado { get; set; } = true;
     }
 }

@@ -15,11 +15,11 @@ public partial class EditarEstudiante : ContentPage
     public EditarEstudiante(string idEstudiante)
     {
         InitializeComponent();
+        BindingContext = this;
         estudianteID = idEstudiante;
         ListarNivel();
         CargarEstudiante(estudianteID);
     }
-
     private async void ListarNivel()
     {
         try
@@ -41,24 +41,32 @@ public partial class EditarEstudiante : ContentPage
     {
         try
         {
-            var cursos = await client.Child("Cursos")
-                                      .OrderBy("Nivel")
-                                      .EqualTo(nivelSeleccionado.Nombre)
-                                      .OnceAsync<Curso>();
+            var cursos = await client.Child("Cursos").OnceAsync<Curso>();
 
-            ListarCursos.Clear();
-            foreach (var curso in cursos)
+            var cursosFiltrados = cursos.Where(c => c.Object.Nivel == nivelSeleccionado.Nombre).ToList();
+
+            if (cursosFiltrados.Any())
             {
-                ListarCursos.Add(curso.Object);
+                ListarCursos.Clear();
+                foreach (var curso in cursosFiltrados)
+                {
+                    ListarCursos.Add(curso.Object);
+                }
+                cursoPicker.IsEnabled = true;
             }
-
-            cursoPicker.IsEnabled = true;
+            else
+            {
+                cursoPicker.IsEnabled = false;
+                await DisplayAlert("Información", "No hay cursos disponibles para este nivel.", "OK");
+            }
         }
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"Error al cargar cursos: {ex.Message}", "OK");
         }
     }
+
+
 
     private async void CargarEstudiante(string idEstudiante)
     {

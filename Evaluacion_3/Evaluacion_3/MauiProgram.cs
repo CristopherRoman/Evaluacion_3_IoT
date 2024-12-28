@@ -35,36 +35,31 @@ namespace Evaluacion_3
             {
                 FirebaseClient client = new FirebaseClient("https://registroestudiantes-49dad-default-rtdb.europe-west1.firebasedatabase.app/");
 
-                // Verificar si ya existen los niveles
                 var nivel = await client.Child("Nivel").OnceAsync<Nivel>();
-                if (nivel.Count == 0)  // Usar Any() para evitar recorrer toda la colección
+                if (nivel.Count == 0) 
                 {
                     await client.Child("Nivel").PostAsync(new Nivel { Nombre = "Basica" });
                     await client.Child("Nivel").PostAsync(new Nivel { Nombre = "Media" });
                 }
 
-                // Verificar si ya existen los cursos
                 var cursos = await client.Child("Cursos").OnceAsync<Curso>();
                 if (cursos.Count == 0)
                 {
-                    // Crear cursos para "Basica"
                     var cursosBasica = new string[] { "1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°" };
                     foreach (var curso in cursosBasica)
                     {
-                        await client.Child("Cursos").PostAsync(new Curso { Nombre = curso, Nivel = "Basica" });
+                        await client.Child("Cursos").PostAsync(new Curso { Nombre = curso, Nivel = "Basica" , Estado = true});
                     }
 
-                    // Crear cursos para "Media"
                     var cursosMedia = new string[] { "1°", "2°", "3°", "4°" };
                     foreach (var curso in cursosMedia)
                     {
-                        await client.Child("Cursos").PostAsync(new Curso { Nombre = curso, Nivel = "Media" });
+                        await client.Child("Cursos").PostAsync(new Curso { Nombre = curso, Nivel = "Media", Estado = true});
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Manejar cualquier error que ocurra durante el proceso
                 Console.WriteLine($"Error en Registrar: {ex.Message}");
             }
         }
@@ -100,26 +95,23 @@ namespace Evaluacion_3
             {
                 FirebaseClient client = new FirebaseClient("https://registroestudiantes-49dad-default-rtdb.europe-west1.firebasedatabase.app/");
 
-                // Obtener los estudiantes
                 var estudiantes = await client.Child("Estudiantes").OnceAsync<Estudiante>();
 
                 foreach (var estudiante in estudiantes)
                 {
-                    if (estudiante.Object.Estado == null)  // Verificar si Estado es null
+                    if (estudiante.Object.Estado == null)  
                     {
                         var estudianteActualizado = new Estudiante
                         {
-                            Estado = true  // Solo actualizamos el estado
+                            Estado = true  
                         };
 
-                        // Actualizar solo el campo "Estado" del estudiante
                         await client.Child("Estudiantes").Child(estudiante.Key).PatchAsync(estudianteActualizado);
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Manejar cualquier error que ocurra durante el proceso
                 Console.WriteLine($"Error en ActualizarEstudiante: {ex.Message}");
             }
         }
